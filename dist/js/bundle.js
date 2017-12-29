@@ -68,34 +68,81 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-// import fetch from 'cross-fetch';
-//
-//
-// let fetchHeaders = {
-//     "x-app-id" : "a7e1d127",
-//     "x-app-key" : "6929216b435bdf519563002b48e7b614",
-//     "x-remote-user-id": "0",
-//     "Content-Type": "application/json"
-// };
-//
-// let fetchBody = JSON.stringify({
-//     "query":"2 eggs"
-// });
-//
-// let fetchConfig = {
-//     method: 'POST',
-//     headers: fetchHeaders,
-//     body: fetchBody
-// };
-//
-// fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', fetchConfig)
-//     .then(result => {
-//         if (result.ok){
-//             return result.json();
-//         }
-//     })
-//     .then(result => console.log(result))
 
+
+var _actions = __webpack_require__(1);
+
+var _actions2 = _interopRequireDefault(_actions);
+
+var _reducers = __webpack_require__(2);
+
+var _reducers2 = _interopRequireDefault(_reducers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["requestNutrients"] = requestNutrients;
+/* harmony export (immutable) */ __webpack_exports__["receiveNutrients"] = receiveNutrients;
+const REQUEST_NUTRIENTS = 'REQUEST_NUTRIENTS';
+/* harmony export (immutable) */ __webpack_exports__["REQUEST_NUTRIENTS"] = REQUEST_NUTRIENTS;
+
+const RECEIEVE_NUTRIENTS = 'RECEIVE_NUTRIENTS';
+/* harmony export (immutable) */ __webpack_exports__["RECEIEVE_NUTRIENTS"] = RECEIEVE_NUTRIENTS;
+
+
+function requestNutrients(text) {
+    return {
+        type : REQUEST_NUTRIENTS,
+        text
+    }
+}
+
+function receiveNutrients(text, json ) {
+    return {
+        type : REQUEST_NUTRIENTS,
+        text,
+        name: json.foods[0].food_name,
+        kcal: json.foods[0].nf_calories
+    }
+}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions_actions__ = __webpack_require__(1);
+
+
+function food(
+    state = {
+        isFetching: false,
+        foods: []
+    },
+    action) {
+    switch (action.type) {
+        case __WEBPACK_IMPORTED_MODULE_0__actions_actions__["REQUEST_NUTRIENTS"]:
+            return Object.assign({}, state, {isFetching: true})
+        case __WEBPACK_IMPORTED_MODULE_0__actions_actions__["RECEIEVE_NUTRIENTS"]:
+            return Object.assign({}, state, {foods : [
+                ...state.foods,
+                {
+                    [action.text] : {
+                        foodType: action.name,
+                        energy : action.kcal
+                    }
+                }
+                ]})
+        default:
+            return state
+    }
+}
 
 /***/ })
 /******/ ]);

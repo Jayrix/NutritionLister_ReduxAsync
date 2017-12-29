@@ -25,3 +25,5 @@
 //         }
 //     })
 //     .then(result => console.log(result))
+import actions from './actions/actions';
+import reducers from './reducers/reducers';
