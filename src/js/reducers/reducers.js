@@ -3,7 +3,7 @@ import {
     RECEIEVE_NUTRIENTS
 } from "../actions/actions";
 
-function food(
+export function foodInformation(
     state = {
         isFetching: false,
         foods: []

@@ -26,4 +26,10 @@
 //     })
 //     .then(result => console.log(result))
 import actions from './actions/actions';
-import reducers from './reducers/reducers';
+import {foodInformation} from './reducers/reducers';
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+
+const store = createStore(foodInformation, applyMiddleware(thunkMiddleware));
+
+console.log(store.getState());
