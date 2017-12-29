@@ -1,6 +1,6 @@
 import {
     REQUEST_NUTRIENTS,
-    RECEIEVE_NUTRIENTS
+    RECEIVE_NUTRIENTS
 } from "../actions/actions";
 
 export function foodInformation(
@@ -12,7 +12,7 @@ export function foodInformation(
     switch (action.type) {
         case REQUEST_NUTRIENTS:
             return Object.assign({}, state, {isFetching: true})
-        case RECEIEVE_NUTRIENTS:
+        case RECEIVE_NUTRIENTS:
             return Object.assign({}, state, {foods : [
                 ...state.foods,
                 {

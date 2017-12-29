@@ -72,8 +72,6 @@
 
 var _actions = __webpack_require__(1);
 
-var _actions2 = _interopRequireDefault(_actions);
-
 var _reducers = __webpack_require__(2);
 
 var _redux = __webpack_require__(10);
@@ -115,6 +113,15 @@ var store = (0, _redux.createStore)(_reducers.foodInformation, (0, _redux.applyM
 
 console.log(store.getState());
 
+store.dispatch((0, _actions.receiveNutrients)('2 eggs', {
+    foods: [{
+        food_name: 'egg',
+        nf_calories: '77'
+    }]
+}));
+
+console.log(store.getState());
+
 /***/ }),
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -126,8 +133,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 const REQUEST_NUTRIENTS = 'REQUEST_NUTRIENTS';
 /* harmony export (immutable) */ __webpack_exports__["REQUEST_NUTRIENTS"] = REQUEST_NUTRIENTS;
 
-const RECEIEVE_NUTRIENTS = 'RECEIVE_NUTRIENTS';
-/* harmony export (immutable) */ __webpack_exports__["RECEIEVE_NUTRIENTS"] = RECEIEVE_NUTRIENTS;
+const RECEIVE_NUTRIENTS = 'RECEIVE_NUTRIENTS';
+/* harmony export (immutable) */ __webpack_exports__["RECEIVE_NUTRIENTS"] = RECEIVE_NUTRIENTS;
 
 
 function requestNutrients(text) {
@@ -139,7 +146,7 @@ function requestNutrients(text) {
 
 function receiveNutrients(text, json ) {
     return {
-        type : REQUEST_NUTRIENTS,
+        type : RECEIVE_NUTRIENTS,
         text,
         name: json.foods[0].food_name,
         kcal: json.foods[0].nf_calories
@@ -165,7 +172,7 @@ function foodInformation(
     switch (action.type) {
         case __WEBPACK_IMPORTED_MODULE_0__actions_actions__["REQUEST_NUTRIENTS"]:
             return Object.assign({}, state, {isFetching: true})
-        case __WEBPACK_IMPORTED_MODULE_0__actions_actions__["RECEIEVE_NUTRIENTS"]:
+        case __WEBPACK_IMPORTED_MODULE_0__actions_actions__["RECEIVE_NUTRIENTS"]:
             return Object.assign({}, state, {foods : [
                 ...state.foods,
                 {

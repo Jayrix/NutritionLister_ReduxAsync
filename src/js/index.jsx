@@ -25,11 +25,22 @@
 //         }
 //     })
 //     .then(result => console.log(result))
-import actions from './actions/actions';
+import {receiveNutrients} from './actions/actions';
 import {foodInformation} from './reducers/reducers';
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
 const store = createStore(foodInformation, applyMiddleware(thunkMiddleware));
+
+console.log(store.getState());
+
+store.dispatch(receiveNutrients('2 eggs',
+    {
+        foods : [{
+            food_name: 'egg',
+            nf_calories: '77'
+        }]
+    })
+);
 
 console.log(store.getState());
