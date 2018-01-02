@@ -1,3 +1,5 @@
+
+
 export const REQUEST_NUTRIENTS = 'REQUEST_NUTRIENTS';
 export const RECEIVE_NUTRIENTS = 'RECEIVE_NUTRIENTS';
 
@@ -16,3 +18,5 @@ export function receiveNutrients(text, json ) {
         kcal: json.foods[0].nf_calories
     }
 }
+
+

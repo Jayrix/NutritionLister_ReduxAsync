@@ -60,76 +60,19 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _actions = __webpack_require__(1);
-
-var _reducers = __webpack_require__(2);
-
-var _redux = __webpack_require__(10);
-
-var _reduxThunk = __webpack_require__(26);
-
-var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import fetch from 'cross-fetch';
-//
-//
-// let fetchHeaders = {
-//     "x-app-id" : "a7e1d127",
-//     "x-app-key" : "6929216b435bdf519563002b48e7b614",
-//     "x-remote-user-id": "0",
-//     "Content-Type": "application/json"
-// };
-//
-// let fetchBody = JSON.stringify({
-//     "query":"2 eggs"
-// });
-//
-// let fetchConfig = {
-//     method: 'POST',
-//     headers: fetchHeaders,
-//     body: fetchBody
-// };
-//
-// fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', fetchConfig)
-//     .then(result => {
-//         if (result.ok){
-//             return result.json();
-//         }
-//     })
-//     .then(result => console.log(result))
-var store = (0, _redux.createStore)(_reducers.foodInformation, (0, _redux.applyMiddleware)(_reduxThunk2.default));
-
-console.log(store.getState());
-
-store.dispatch((0, _actions.receiveNutrients)('2 eggs', {
-    foods: [{
-        food_name: 'egg',
-        nf_calories: '77'
-    }]
-}));
-
-console.log(store.getState());
-
-/***/ }),
-/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (immutable) */ __webpack_exports__["requestNutrients"] = requestNutrients;
 /* harmony export (immutable) */ __webpack_exports__["receiveNutrients"] = receiveNutrients;
+
+
 const REQUEST_NUTRIENTS = 'REQUEST_NUTRIENTS';
 /* harmony export (immutable) */ __webpack_exports__["REQUEST_NUTRIENTS"] = REQUEST_NUTRIENTS;
 
@@ -153,42 +96,11 @@ function receiveNutrients(text, json ) {
     }
 }
 
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (immutable) */ __webpack_exports__["foodInformation"] = foodInformation;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions_actions__ = __webpack_require__(1);
 
 
-function foodInformation(
-    state = {
-        isFetching: false,
-        foods: []
-    },
-    action) {
-    switch (action.type) {
-        case __WEBPACK_IMPORTED_MODULE_0__actions_actions__["REQUEST_NUTRIENTS"]:
-            return Object.assign({}, state, {isFetching: true})
-        case __WEBPACK_IMPORTED_MODULE_0__actions_actions__["RECEIVE_NUTRIENTS"]:
-            return Object.assign({}, state, {foods : [
-                ...state.foods,
-                {
-                    [action.text] : {
-                        foodType: action.name,
-                        energy : action.kcal
-                    }
-                }
-                ]})
-        default:
-            return state
-    }
-}
 
 /***/ }),
-/* 3 */
+/* 1 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -378,13 +290,13 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 4 */
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActionTypes; });
 /* harmony export (immutable) */ __webpack_exports__["b"] = createStore;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_symbol_observable__);
 
@@ -637,7 +549,7 @@ var ActionTypes = {
 }
 
 /***/ }),
-/* 5 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -709,7 +621,7 @@ function isPlainObject(value) {
 
 
 /***/ }),
-/* 6 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -723,7 +635,7 @@ var Symbol = __WEBPACK_IMPORTED_MODULE_0__root_js__["a" /* default */].Symbol;
 
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ (function(module, exports) {
 
 var g;
@@ -750,7 +662,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 8 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -778,7 +690,7 @@ function warning(message) {
 }
 
 /***/ }),
-/* 9 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -817,17 +729,83 @@ function compose() {
 }
 
 /***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _actions = __webpack_require__(0);
+
+var _reducers = __webpack_require__(9);
+
+var _redux = __webpack_require__(10);
+
+var _reduxThunk = __webpack_require__(26);
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var store = (0, _redux.createStore)(_reducers.foodInformation, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+
+console.log(store.getState());
+
+store.dispatch((0, _actions.receiveNutrients)('2 eggs', {
+    foods: [{
+        food_name: 'egg',
+        nf_calories: '77'
+    }]
+}));
+
+console.log(store.getState());
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["foodInformation"] = foodInformation;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions_actions__ = __webpack_require__(0);
+
+
+function foodInformation(
+    state = {
+        isFetching: false,
+        foods: []
+    },
+    action) {
+    switch (action.type) {
+        case __WEBPACK_IMPORTED_MODULE_0__actions_actions__["REQUEST_NUTRIENTS"]:
+            return Object.assign({}, state, {isFetching: true})
+        case __WEBPACK_IMPORTED_MODULE_0__actions_actions__["RECEIVE_NUTRIENTS"]:
+            return Object.assign({}, state, {foods : [
+                ...state.foods,
+                {
+                    [action.text] : {
+                        foodType: action.name,
+                        energy : action.kcal
+                    }
+                }
+                ]})
+        default:
+            return state
+    }
+}
+
+/***/ }),
 /* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(4);
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__combineReducers__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(6);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createStore", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "combineReducers", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "bindActionCreators", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
@@ -851,14 +829,14 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 }
 
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
 /* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(15);
 
@@ -918,14 +896,14 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 
 /* harmony default export */ __webpack_exports__["a"] = (freeGlobal);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5)))
 
 /***/ }),
 /* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(4);
 
 
 /** Used for built-in method references. */
@@ -1116,7 +1094,7 @@ if (typeof self !== 'undefined') {
 
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(21)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(21)(module)))
 
 /***/ }),
 /* 21 */
@@ -1181,9 +1159,9 @@ function symbolObservablePonyfill(root) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = combineReducers;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_warning__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_warning__ = __webpack_require__(6);
 
 
 
@@ -1314,7 +1292,7 @@ function combineReducers(reducers) {
     return hasChanged ? nextState : state;
   };
 }
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
 /* 24 */
@@ -1376,7 +1354,7 @@ function bindActionCreators(actionCreators, dispatch) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = applyMiddleware;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(7);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
