@@ -8,15 +8,6 @@ const fetchHeaders = {
     "Content-Type": "application/json"
 };
 
-// let fetchBody = JSON.stringify({
-//     "query":"2 eggs"
-// });
-//
-// let fetchConfig = {
-//     method: 'POST',
-//     headers: fetchHeaders,
-//     body: fetchBody
-// };
 
 function fetchConfig(text){
     return {
@@ -28,27 +19,19 @@ function fetchConfig(text){
     }
 }
 
-// fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', fetchConfig())
-//     .then(result => {
-//         if (result.ok){
-//             return result.json();
-//         }
-//     })
-//     .then(result => console.log(result))
-
 export function fetchNutrients(text){
     return function (dispatch) {
         dispatch(requestNutrients(text));
         return (
-            fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', fetchConfig())
+            fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', fetchConfig(text))
             .then(result => {
                 if (result.ok){
                     return result.json();
                 }
             })
-            .then(result => console.log(result))
+            .then(json => {
+                dispatch(receiveNutrients(text, json))
+            })
         )
     }
 }
-
-fetchNutrients('chicken');
