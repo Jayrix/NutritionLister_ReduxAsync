@@ -18,4 +18,4 @@ console.log(store.getState());
 // );
 
 store.dispatch(fetchNutrients('turkey'))
-    .then(()=> console.log(store.getState()))
+    .then(()=> console.log('store after fetch: ', store.getState()))
