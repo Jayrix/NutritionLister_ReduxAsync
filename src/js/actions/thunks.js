@@ -24,11 +24,16 @@ export function fetchNutrients(text){
         dispatch(requestNutrients(text));
         return (
             fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', fetchConfig(text))
-            .then(result => {
-                if (result.ok){
-                    return result.json();
-                }
-            })
+            .then(
+                result => {
+                    if (result.ok){
+                        return result.json();
+                    } else {
+                        console.log('Result not ok');
+                    }
+                },
+                error => console.log('An error occured: ', error)
+            )
             .then(json => {
                 dispatch(receiveNutrients(text, json))
             })
