@@ -3,6 +3,7 @@ import {receiveNutrients} from '../actions/actions';
 import {foodInformation} from '../reducers/reducers';
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
+import Foods from './Foods';
 
 const store = createStore(foodInformation, applyMiddleware(thunkMiddleware));
 

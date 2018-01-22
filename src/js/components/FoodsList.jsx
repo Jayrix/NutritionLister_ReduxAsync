@@ -1,5 +1,5 @@
 import React from 'react';
-import FoodInfo from 'FoodInfo.jsx';
+import FoodInfo from './FoodInfo.jsx';
 
 
 let FoodsList = (props) => (
