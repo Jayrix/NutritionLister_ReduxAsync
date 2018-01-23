@@ -17,10 +17,9 @@ export function foodInformation(
                 foods : [
                     ...state.foods,
                     {
-                        [action.text] : {
-                            foodType: action.name,
-                            energy : action.kcal
-                        }
+                        searchString: action.text,
+                        foodType: action.name,
+                        energy : action.kcal
                     }
                 ]})
         default:

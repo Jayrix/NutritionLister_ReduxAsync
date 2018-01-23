@@ -1427,6 +1427,8 @@ var _Root2 = _interopRequireDefault(_Root);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+(0, _reactDom.render)(_react2.default.createElement(_Root2.default, null), document.getElementById('root'));
+
 /***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18742,11 +18744,19 @@ module.exports = camelize;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _thunks = __webpack_require__(35);
 
 var _actions = __webpack_require__(7);
 
-var _reducers = __webpack_require__(37);
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
 
 var _redux = __webpack_require__(38);
 
@@ -18754,28 +18764,57 @@ var _reduxThunk = __webpack_require__(54);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
+var _reactRedux = __webpack_require__(62);
+
+var _reducers = __webpack_require__(37);
+
 var _Foods = __webpack_require__(61);
 
 var _Foods2 = _interopRequireDefault(_Foods);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var store = (0, _redux.createStore)(_reducers.foodInformation, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+
+var Root = function (_Component) {
+    _inherits(Root, _Component);
+
+    function Root() {
+        _classCallCheck(this, Root);
+
+        return _possibleConstructorReturn(this, (Root.__proto__ || Object.getPrototypeOf(Root)).apply(this, arguments));
+    }
+
+    _createClass(Root, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactRedux.Provider,
+                { store: store },
+                _react2.default.createElement(_Foods2.default, null)
+            );
+        }
+    }]);
+
+    return Root;
+}(_react.Component);
+
+exports.default = Root;
+
 
 console.log(store.getState());
 
-// store.dispatch(receiveNutrients('2 eggs',
-//     {
-//         foods : [{
-//             food_name: 'egg',
-//             nf_calories: '77'
-//         }]
-//     })
-// );
-
-store.dispatch((0, _thunks.fetchNutrients)('turkey')).then(function () {
-    return console.log('store after fetch: ', store.getState());
-});
+setTimeout(function () {
+    store.dispatch((0, _thunks.fetchNutrients)('turkey')).then(function () {
+        return console.log('store after fetch: ', store.getState());
+    });
+}, 1000);
 
 /***/ }),
 /* 35 */
@@ -19339,10 +19378,9 @@ function foodInformation(
                 foods : [
                     ...state.foods,
                     {
-                        [action.text] : {
-                            foodType: action.name,
-                            energy : action.kcal
-                        }
+                        searchString: action.text,
+                        foodType: action.name,
+                        energy : action.kcal
                     }
                 ]})
         default:
@@ -20488,11 +20526,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 const mapStateToProps = state => {
+    return {
+        foodsArray : state.foods
+    }
+};
 
-}
-
-const Foods = Object(__WEBPACK_IMPORTED_MODULE_0_react_redux__["a" /* connect */])(mapStateToProps)(__WEBPACK_IMPORTED_MODULE_1__components_FoodsList_jsx___default.a);
+const Foods = Object(__WEBPACK_IMPORTED_MODULE_0_react_redux__["connect"])(mapStateToProps)(__WEBPACK_IMPORTED_MODULE_1__components_FoodsList_jsx___default.a);
 
 /* harmony default export */ __webpack_exports__["default"] = (Foods);
 
@@ -20501,13 +20542,14 @@ const Foods = Object(__WEBPACK_IMPORTED_MODULE_0_react_redux__["a" /* connect */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(69);
-/* unused harmony reexport Provider */
-/* unused harmony reexport createProvider */
-/* unused harmony reexport connectAdvanced */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__connect_connect__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createProvider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connect", function() { return __WEBPACK_IMPORTED_MODULE_2__connect_connect__["a"]; });
 
 
 
@@ -20519,7 +20561,7 @@ const Foods = Object(__WEBPACK_IMPORTED_MODULE_0_react_redux__["a" /* connect */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* unused harmony export createProvider */
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = createProvider;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(56);
@@ -20597,7 +20639,7 @@ function createProvider() {
   return Provider;
 }
 
-/* unused harmony default export */ var _unused_webpack_default_export = (createProvider());
+/* harmony default export */ __webpack_exports__["b"] = (createProvider());
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
@@ -21853,6 +21895,10 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
@@ -21864,14 +21910,27 @@ var _FoodInfo2 = _interopRequireDefault(_FoodInfo);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FoodsList = function FoodsList(props) {
+    //console.log("propsy FoodList to:", props.foodsPropertiesArray.map(food => food));
+
     return _react2.default.createElement(
-        'ul',
+        'article',
         null,
-        props.foodsArray.map(function (food, index) {
-            return _react2.default.createElement(_FoodInfo2.default, { key: index, foodName: props.foodName, foodKcals: props.foodKcals });
-        })
+        _react2.default.createElement(
+            'p',
+            null,
+            'You searched for: '
+        ),
+        _react2.default.createElement(
+            'ul',
+            null,
+            props.foodsArray.map(function (food, index) {
+                return _react2.default.createElement(_FoodInfo2.default, { key: index, searchString: food.searchString, foodType: food.foodType, energy: food.energy });
+            })
+        )
     );
 };
+
+exports.default = FoodsList;
 
 /***/ }),
 /* 77 */
@@ -21883,7 +21942,6 @@ var FoodsList = function FoodsList(props) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.FoodInfo = undefined;
 
 var _react = __webpack_require__(4);
 
@@ -21891,14 +21949,18 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var FoodInfo = exports.FoodInfo = function FoodInfo(props) {
+var FoodInfo = function FoodInfo(props) {
+    //console.log("propsy to:", props);
+
     return _react2.default.createElement(
         'li',
         null,
         _react2.default.createElement(
             'span',
             null,
-            props.foodName
+            '"',
+            props.searchString,
+            '"'
         ),
         _react2.default.createElement(
             'ul',
@@ -21906,11 +21968,20 @@ var FoodInfo = exports.FoodInfo = function FoodInfo(props) {
             _react2.default.createElement(
                 'li',
                 null,
-                props.foodKcals
+                'Food type: ',
+                props.foodType
+            ),
+            _react2.default.createElement(
+                'li',
+                null,
+                'Energy value: ',
+                props.energy
             )
         )
     );
 };
+
+exports.default = FoodInfo;
 
 /***/ })
 /******/ ]);
